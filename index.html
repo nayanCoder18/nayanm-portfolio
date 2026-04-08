@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-62Z6NC0KEL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-62Z6NC0KEL');
+</script>
+
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Nayan Mandal | Data Analyst</title>
@@ -539,6 +550,7 @@ footer span{color:var(--teal)}
 var ADMIN_MODE = false;
 var ADMIN_PASSWORD = "721439";
 var PK='nm_p6',CK='nm_c6',AK='nm_a6',TK='nm_t6',EK='nm_e6',SK='nm_s6',FK='nm_f6',ACHK='nm_ach6',PHK='nm_ph6';
+
 function unlockAdmin(){
   var pass = prompt("Enter admin password");
 
@@ -588,12 +600,39 @@ function defProj(){return[
   tools:['Excel','SQL','Power BI','DAX'],
   cat:'Power BI',
   link:'https://github.com/nayanCoder18/Hospital-Analytics-Dashboard-Excel-SQL-Power-BI-'
+},
+  {id:'p4',
+    title:'Housing Market Analysis – Power BI + BigQuery',
+    desc:'Complete Housing Market Analytics System using Google BigQuery and Power BI. Built 3 interactive dashboards with KPIs like YoY Sales Growth, Median Price Change, and Offer vs Purchase analysis. Performed data cleaning, transformation, and outlier handling using Power Query. Designed a star schema model with SQL pre-aggregation and developed advanced DAX measures for business insights.',
+    tools:['Power Bi','BigQuery'],
+    cat:'Power Bi',
+    link: 'https://github.com/nayanCoder18/Housing-Market-Analysis-Power-BI-BigQuery'
+},
+  {id:'p5',
+  title:'Loan Portfolio Risk Analytics Dashboard using Power BI, DAX, and SQL',
+  desc:'Complete Loan Portfolio Risk Analytics System using Power BI. Built 3 interactive dashboards for default analysis, borrower profiling, and financial risk forecasting with 18+ KPIs. Developed advanced DAX measures for YoY growth, default rate, and segmentation analysis. Delivered data-driven insights for risk reduction and smarter lending decisions.',
+  tools:['Power BI','DAX','SQL','Power BI Data Flows'],
+  cat:'Power BI',
+  link:'https://github.com/nayanCoder18/loan-analytics-dashboard'
+},
+  {id:'p6',
+  title:'🧠 Insurance Claims & Customer Analytics Platform (Power BI + DAX + SQL)',
+  desc:'A production-ready insurance analytics solution designed to monitor policy performance, claims behavior, and customer sentiment.This project converts raw transactional data into decision-grade insights using advanced DAX modeling, interactive dashboards, and structured data pipelines.',
+  tools:['Python','psycopg2','Pandas','pymysql'],
+  cat:'Python',
+  link:'https://github.com/nayanCoder18/loan-analytics-dashboard'
 }
 ];}
 function defCerts(){return[
-  {id:'c1',name:'Complete Data Analyst Bootcamp: Basics to Advanced',issuer:'Udemy',date:'Sep 2025',fd:null,ft:null},
-  {id:'c2',name:'SQL Intermediate Certificate',issuer:'HackerRank',date:'Jul 2025',fd:null,ft:null},
-  {id:'c3',name:'SQL Basic Certificate',issuer:'HackerRank',date:'Jul 2025',fd:null,ft:null}
+  {id:'c1',
+  name:'Complete Data Analyst Bootcamp: Basics to Advanced',
+  issuer:'Udemy',
+  date:'Sep 2025',
+  fd:null,
+  ft:null
+},
+  {id:'c2',name:'SQL Intermediate Certificate',issuer:'HackerRank',date:'Jul 2025',fd:null,ft:"SQLinter.png"},
+  {id:'c3',name:'SQL Basic Certificate',issuer:'HackerRank',date:'Jul 2025',fd:null,ft:"SQLbasic.jpg"}
 ];}
 function defAbout(){return{bg:'B.Com graduate from Vidyasagar University with a specialization in Accounting and Finance. My commerce foundation gives me a unique lens for financial data analysis and business intelligence.',doWhat:'I build end-to-end analytics pipelines — from SQL-based data transformation and star schema design to interactive Power BI dashboards with DAX measures. Experienced with PostgreSQL, SQL Server, Snowflake, and AWS S3.',goals:'Actively seeking a Data Analyst or BI Developer role where I can contribute to data-driven decision making and grow across the modern data stack.'};}
 function defTimeline(){return[
@@ -626,33 +665,46 @@ function defAch(){return[
   {id:'a3',title:'End-to-End BI Pipelines',desc:'Complete pipelines from raw data to star schema to Power BI dashboards with 40+ DAX measures.',icon:'fa-solid fa-database'}
 ];}
 
-function ld(k,def){try{var v=JSON.parse(localStorage.getItem(k));return v&&v.length!==undefined?v:(v&&Object.keys(v).length?v:null);}catch(e){return null;}}
-function loadAll(){
-  projects=ld(PK,null)||defProj(); if(!localStorage.getItem(PK)) save(PK,projects);
-  certs=ld(CK,null)||defCerts();   if(!localStorage.getItem(CK)) save(CK,certs);
-  var ab=ld(AK,null); aboutData=ab&&ab.bg?ab:defAbout(); if(!localStorage.getItem(AK)) save(AK,aboutData);
-  timeline=ld(TK,null)||defTimeline();   if(!localStorage.getItem(TK)) save(TK,timeline);
-  education=ld(EK,null)||defEdu();       if(!localStorage.getItem(EK)) save(EK,education);
-  skills=ld(SK,null)||defSkills();       if(!localStorage.getItem(SK)) save(SK,skills);
-  future=ld(FK,null)||defFuture();       if(!localStorage.getItem(FK)) save(FK,future);
-  achievements=ld(ACHK,null)||defAch();  if(!localStorage.getItem(ACHK)) save(ACHK,achievements);
-  // photo
-  var ph=localStorage.getItem(PHK);
-  if(ph){document.getElementById('photo-img').src=ph;document.getElementById('photo-img').style.display='block';}
-}
-function save(k,d){try{localStorage.setItem(k,JSON.stringify(d));return true;}catch(e){toast('Storage full.','e');return false;}}
+
 
 document.addEventListener('DOMContentLoaded',function(){
-  loadAll();
-  renderChips();renderProjects();renderAbout();renderSkills();renderCerts();renderAch();
-  setupNav();setupObs();initCanvas();
-  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  projects = defProj();
+  certs = defCerts();
+  aboutData = defAbout();
+  timeline = defTimeline();
+  education = defEdu();
+  skills = defSkills();
+  future = defFuture();
+  achievements = defAch();
+
+  renderChips();
+  renderProjects();
+  renderAbout();
+  renderSkills();
+  renderCerts();
+  renderAch();
+
+  setupNav();
+  setupObs();
+  initCanvas();
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
   updCounts();
+
   document.getElementById('fpls').addEventListener('click',function(e){
-    var p=e.target.closest('.pll');if(!p)return;
-    document.querySelectorAll('.pll').forEach(function(x){x.classList.remove('act');});
-    p.classList.add('act');activeF=p.dataset.f;renderProjects();
+    var p = e.target.closest('.pll');
+    if(!p) return;
+
+    document.querySelectorAll('.pll').forEach(function(x){
+      x.classList.remove('act');
+    });
+
+    p.classList.add('act');
+    activeF = p.dataset.f;
+    renderProjects();
   });
+
 });
 
 function renderChips(){
@@ -668,7 +720,7 @@ function uploadPhoto(e){
     var data=ev.target.result;
     document.getElementById('photo-img').src=data;
     document.getElementById('photo-img').style.display='block';
-    document.getElementById('photo-ph').style.display='none';
+    
     try{localStorage.setItem(PHK,data);toast('Photo updated!','s');}catch(e){toast('Photo too large for storage — try a smaller image.','e');}
   };
   r.readAsDataURL(file);
@@ -869,6 +921,10 @@ function cmenu(){document.getElementById('nls').classList.remove('open');}
 function setupObs(){var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');if(e.target.id==='sgrid')setTimeout(animSkills,200);}});},{threshold:.1});document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});}
 function toast(msg,type){var icons={s:'fa-circle-check',e:'fa-circle-xmark',i:'fa-circle-info'};var t=document.createElement('div');t.className='toast t'+(type||'s');t.innerHTML='<i class="fa-solid '+icons[type||'s']+'"></i> '+msg;document.getElementById('twrap').appendChild(t);setTimeout(function(){if(t.parentNode)t.parentNode.removeChild(t);},3500);}
 function x(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+function save(k,d){
+  return true;
+}
 
 // CANVAS
 function initCanvas(){var cv=document.getElementById('bgc'),cx=cv.getContext('2d'),W,H,nodes=[];function resize(){W=cv.width=window.innerWidth;H=cv.height=window.innerHeight;nodes=[];for(var i=0;i<50;i++)nodes.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.28,vy:(Math.random()-.5)*.28,r:1.4+Math.random()*2,c:Math.random()>.5?'#00e5d4':'#9d6fff'});}function draw(){cx.clearRect(0,0,W,H);cx.strokeStyle='rgba(0,229,212,.03)';cx.lineWidth=1;for(var gx=0;gx<W;gx+=60){cx.beginPath();cx.moveTo(gx,0);cx.lineTo(gx,H);cx.stroke();}for(var gy=0;gy<H;gy+=60){cx.beginPath();cx.moveTo(0,gy);cx.lineTo(W,gy);cx.stroke();}nodes.forEach(function(n){n.x+=n.vx;n.y+=n.vy;if(n.x<0||n.x>W)n.vx*=-1;if(n.y<0||n.y>H)n.vy*=-1;cx.beginPath();cx.arc(n.x,n.y,n.r,0,Math.PI*2);cx.fillStyle=n.c+'55';cx.fill();});for(var i=0;i<nodes.length;i++)for(var j=i+1;j<nodes.length;j++){var dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<120){cx.beginPath();cx.moveTo(nodes[i].x,nodes[i].y);cx.lineTo(nodes[j].x,nodes[j].y);cx.strokeStyle='rgba(0,229,212,'+(0.1*(1-d/120))+')';cx.lineWidth=.7;cx.stroke();}}requestAnimationFrame(draw);}window.addEventListener('resize',resize);resize();draw();}
